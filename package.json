@@ -1,0 +1,13 @@
+{
+  "name": "chatbox-realtime",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Chat em tempo real com salas, mídia (imagens, vídeos e áudios), música sincronizada e área administrativa em Node.js puro.",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Baixe o ChatBox: chat em tempo real em Node.js sem dependências, com salas, imagens, vídeos, áudios, música sincronizada e painel administrativo.">
+  <title>Baixar o ChatBox — projeto completo</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/download.css">
+</head>
+<body class="download-page">
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v11"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/><path d="M18.5 16l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-2.9 8.1-7 10-4.1-1.9-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4V4h11v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/><path d="M8 9h8M8 12h5"/></symbol>
+    <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></symbol>
+  </svg>
+
+  <div class="aurora" aria-hidden="true">
+    <span class="orb orb-a"></span>
+    <span class="orb orb-b"></span>
+    <span class="orb orb-c"></span>
+    <span class="grid-glow"></span>
+  </div>
+
+  <header class="dl-header">
+    <a class="dl-brand" href="/">
+      <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-spark"/></svg></span>
+      <span class="brand-copy">
+        <strong>ChatBox</strong>
+        <small>projeto completo</small>
+      </span>
+    </a>
+    <nav class="dl-nav">
+      <a class="btn btn-soft" href="/">Abrir o chat</a>
+      <a class="btn btn-primary" href="/api/download">
+        <svg class="icon"><use href="#i-download"/></svg>
+        Baixar ZIP
+      </a>
+    </nav>
+  </header>
+
+  <main class="dl-main">
+    <section class="dl-hero">
+      <div class="dl-hero-copy">
+        <p class="dl-badge"><span class="dl-badge-dot"></span> Node.js puro · zero dependências</p>
+        <h1>Leve o ChatBox<br><span>com você.</span></h1>
+        <p class="dl-lead">
+          Um chat em tempo real completo em um único ZIP. Salas, presença ao vivo,
+          reações e uma área administrativa com banir, mutar e expulsar.
+        </p>
+        <div class="dl-cta">
+          <a class="btn btn-primary btn-large" id="download-btn" href="/api/download">
+            <svg class="icon"><use href="#i-download"/></svg>
+            Baixar projeto (.zip)
+          </a>
+          <a class="btn btn-soft btn-large" href="/">Ver funcionando</a>
+        </div>
+        <div class="dl-link-box">
+          <span class="dl-link-label">Link de download on-line</span>
+          <div class="dl-link-row">
+            <input id="download-url" readonly value="carregando..." aria-label="Link de download">
+            <button class="btn btn-soft" id="copy-link" type="button">
+              <svg class="icon"><use href="#i-copy"/></svg>
+              Copiar
+            </button>
+          </div>
+          <p class="dl-hint">O link gera o ZIP na hora, com o código-fonte atual deste preview.</p>
+        </div>
+      </div>
+
+      <div class="dl-preview" aria-hidden="true">
+        <div class="dl-preview-head">
+          <span class="dl-window-dot"></span>
+          <span class="dl-window-dot"></span>
+          <span class="dl-window-dot"></span>
+          <span class="dl-preview-title"># geral</span>
+          <span class="dl-live"><span></span> ao vivo</span>
+        </div>
+        <div class="dl-preview-body">
+          <div class="dl-message">
+            <span class="avatar avatar-1 avatar-sm">A</span>
+            <div>
+              <strong>Ana <span class="admin-tag">ADMIN</span></strong>
+              <p>Bem-vindo ao ChatBox. Teste as reações e abra o painel.</p>
+            </div>
+          </div>
+          <div class="dl-message">
+            <span class="avatar avatar-5 avatar-sm">L</span>
+            <div>
+              <strong>Lucas</strong>
+              <p>O slowmode da sala está ativo, mas ainda dá tempo de conversar.</p>
+              <span class="dl-reactions"><span>♥ 3</span><span>★ 1</span></span>
+            </div>
+          </div>
+          <div class="dl-message dl-message-own">
+            <span class="avatar avatar-4 avatar-sm">V</span>
+            <div>
+              <strong>Você</strong>
+              <p>Painel aberto: banir, mutar e expulsar em um clique.</p>
+            </div>
+          </div>
+        </div>
+        <div class="dl-preview-composer">
+          <span>Escreva uma mensagem...</span>
+          <span class="dl-send"><svg class="icon"><use href="#i-spark"/></svg></span>
+        </div>
+        <div class="dl-preview-glow"></div>
+      </div>
+    </section>
+
+    <section class="dl-stats" aria-label="Estatísticas do chat">
+      <div class="dl-stat"><strong id="stat-online">—</strong><span>online agora</span></div>
+      <div class="dl-stat"><strong id="stat-messages">—</strong><span>mensagens</span></div>
+      <div class="dl-stat"><strong id="stat-bans">—</strong><span>banimentos</span></div>
+      <div class="dl-stat"><strong id="stat-rooms">—</strong><span>salas</span></div>
+    </section>
+
+    <section class="dl-section">
+      <div class="dl-section-head">
+        <p class="eyebrow">O que vem no ZIP</p>
+        <h2>Recursos prontos para rodar</h2>
+      </div>
+      <div class="dl-grid">
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-bolt"/></svg></span>
+          <h3>Tempo real de verdade</h3>
+          <p>Servidor WebSocket com reconexão automática, presença, indicador de digitação e reações ao vivo.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
+          <h3>Moderação completa</h3>
+          <p>Banir, mutar, expulsar, remover mensagens, limpar salas e slowmode. Tudo com auditoria.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-image"/></svg></span>
+          <h3>Mídia no chat</h3>
+          <p>Envie imagens, vídeos e áudios pela barra de composição, com prévia, progresso e player integrado.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-music"/></svg></span>
+          <h3>Música ao vivo</h3>
+          <p>Use <code>/play &lt;link direto&gt;</code> ou o botão de um áudio enviado para tocar a mesma faixa, sincronizada, em toda a sala.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-chat"/></svg></span>
+          <h3>Salas e comandos</h3>
+          <p>Três salas, histórico, comandos de barra (<code>/play</code>, <code>/stop</code>, <code>/ban</code>, <code>/mute</code>, <code>/kick</code>) e console administrativo.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-mobile"/></svg></span>
+          <h3>Responsivo e acessível</h3>
+          <p>Layout adaptado para celular, navegação por teclado, rótulos ARIA e respeito a movimento reduzido.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-link"/></svg></span>
+          <h3>Um único arquivo de servidor</h3>
+          <p>Node.js 20+ e nada mais. Sem <code>npm install</code>, sem banco, com estado de moderação persistido.</p>
+        </article>
+        <article class="dl-card">
+          <span class="dl-icon"><svg class="icon"><use href="#i-spark"/></svg></span>
+          <h3>Proteções incluídas</h3>
+          <p>CSP, cookies HttpOnly, limite de tentativas, rate limiting, sanitização e defesa contra CSRF.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="dl-section dl-steps">
+      <div class="dl-section-head">
+        <p class="eyebrow">Início rápido</p>
+        <h2>Do ZIP ao chat em três passos</h2>
+      </div>
+      <ol class="dl-step-list">
+        <li>
+          <span class="dl-step-number">01</span>
+          <div>
+            <h3>Baixe e extraia</h3>
+            <p>Use o botão acima ou copie o link de download on-line.</p>
+          </div>
+        </li>
+        <li>
+          <span class="dl-step-number">02</span>
+          <div>
+            <h3>Inicie o servidor</h3>
+            <p><code>node server.mjs</code> — ou <code>npm start</code>. A porta padrão é 3000.</p>
+          </div>
+        </li>
+        <li>
+          <span class="dl-step-number">03</span>
+          <div>
+            <h3>Entre como admin</h3>
+            <p>Abra <code>/admin</code> e use <code>chatbox-admin</code>. Em produção, defina <code>ADMIN_PASSWORD</code>.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="dl-warning" id="password-warning" hidden>
+        A senha administrativa está no valor padrão. Defina a variável de ambiente
+        <code>ADMIN_PASSWORD</code> antes de publicar o chat.
+      </p>
+    </section>
+  </main>
+
+  <footer class="dl-footer">
+    <p>ChatBox · construído com Node.js, WebSocket e nenhuma dependência externa.</p>
+    <div class="dl-footer-links">
+      <a href="/">Abrir chat</a>
+      <a href="/admin">Administração</a>
+      <a href="/api/download">Baixar ZIP</a>
+    </div>
+  </footer>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+  <script type="module" src="/download.js"></script>
+</body>
+</html>

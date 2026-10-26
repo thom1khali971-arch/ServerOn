@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="ChatBox: chat em tempo real com salas, imagens, vídeos, áudios, música sincronizada, presença ao vivo e moderação.">
+  <title>ChatBox — conversas em tempo real</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-3.2-6.2L4 12z"/><path d="M10.8 13.8L20 4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v11"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-2.9 8.1-7 10-4.1-1.9-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20v-1.5c0-2-1.8-3.5-4-3.5s-4 1.5-4 3.5V20"/><circle cx="12" cy="8" r="3.2"/><path d="M20 19v-1.4c0-1.6-1.2-2.8-3-3.1"/><path d="M17.5 5.2a3 3 0 010 5.6"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 18L18 6"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M9 9H5v6h4l5 4V5L9 9z"/><path d="M17 9l4 6M21 9l-4 6"/></symbol>
+    <symbol id="i-kick" viewBox="0 0 24 24"><path d="M10 4H5v16h5"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4V4h11v1"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/><path d="M18.5 16l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4.5 4.5L19 7"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><path d="M9 6.5A2.5 2.5 0 106.5 9H9V6.5zM15 6.5A2.5 2.5 0 1117.5 9H15V6.5zM9 17.5A2.5 2.5 0 116.5 15H9v2.5zM15 17.5a2.5 2.5 0 102.5-2.5H15v2.5z"/><path d="M9 9h6v6H9z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4.5 18l5-5 3 3 4-4 4 4"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="3"/><path d="M15 10.5l6-3.5v10l-6-3.5z"/></symbol>
+    <symbol id="i-audio" viewBox="0 0 24 24"><path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l10-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path d="M9 9l10-2"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7V5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M9 9H5v6h4l5 4V5L9 9z"/><path d="M17 9a4 4 0 010 6M19.5 6.5a8 8 0 010 11"/></symbol>
+  </svg>
+
+  <div class="aurora" aria-hidden="true">
+    <span class="orb orb-a"></span>
+    <span class="orb orb-b"></span>
+    <span class="orb orb-c"></span>
+    <span class="grid-glow"></span>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação do chat">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-spark"/></svg></span>
+        <span class="brand-copy">
+          <strong>ChatBox</strong>
+          <small>conversa em tempo real</small>
+        </span>
+        <button class="icon-btn mobile-only" id="sidebar-close" type="button" aria-label="Fechar menu">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </div>
+
+      <div class="side-block">
+        <p class="side-label">Salas</p>
+        <nav class="room-list" id="room-list" aria-label="Salas"></nav>
+      </div>
+
+      <div class="side-block side-block-grow">
+        <p class="side-label">Online <span class="count-pill" id="online-count">0</span></p>
+        <ul class="user-list" id="user-list"></ul>
+      </div>
+
+      <div class="side-footer">
+        <a class="btn btn-soft" href="/download" id="download-link">
+          <svg class="icon"><use href="#i-download"/></svg>
+          <span>Baixar projeto</span>
+        </a>
+        <button class="btn btn-soft" id="admin-open" type="button">
+          <svg class="icon"><use href="#i-shield"/></svg>
+          <span>Administração</span>
+        </button>
+        <p class="side-note">WebSocket ao vivo · sem dependências</p>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-only" id="sidebar-open" type="button" aria-label="Abrir menu">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+
+        <div class="room-heading">
+          <div class="room-title-row">
+            <h1 id="room-title">Geral</h1>
+            <span class="live-pill" id="connection-pill"><span class="live-dot"></span><span id="connection-text">conectando</span></span>
+          </div>
+          <p id="room-description">Assunto livre para toda a comunidade.</p>
+        </div>
+
+        <div class="top-actions">
+          <button class="user-chip" id="rename-open" type="button" title="Alterar perfil" aria-label="Alterar perfil">
+            <span class="avatar avatar-0" id="me-avatar">?</span>
+            <span class="user-chip-copy">
+              <strong id="me-name">Visitante</strong>
+              <small id="me-role">entrando...</small>
+            </span>
+            <svg class="icon icon-small"><use href="#i-pencil"/></svg>
+          </button>
+          <a class="icon-btn" href="/download" title="Baixar projeto" aria-label="Baixar projeto">
+            <svg class="icon"><use href="#i-download"/></svg>
+          </a>
+          <button class="icon-btn" id="admin-open-top" type="button" title="Administração" aria-label="Administração">
+            <svg class="icon"><use href="#i-shield"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="chat-stage" aria-label="Mensagens">
+        <div class="message-scroll" id="message-scroll">
+          <div class="message-list" id="message-list"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <span class="empty-glyph"><svg class="icon"><use href="#i-spark"/></svg></span>
+            <h2>Comece a conversa</h2>
+            <p>Ninguém falou nada nesta sala ainda. Envie a primeira mensagem.</p>
+          </div>
+        </div>
+        <button class="jump-latest" id="jump-latest" type="button" hidden>
+          Novas mensagens <span id="jump-count">0</span>
+        </button>
+      </section>
+
+      <div class="composer-wrap">
+        <div class="music-dock" id="music-dock" hidden aria-live="polite">
+          <span class="music-art"><svg class="icon"><use href="#i-music"/></svg></span>
+          <div class="music-copy">
+            <strong id="music-title">Música ao vivo</strong>
+            <span id="music-by">—</span>
+          </div>
+          <span class="music-eq" id="music-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="music-clock" id="music-clock">AO VIVO</span>
+          <a class="music-link" id="music-link" href="#" target="_blank" rel="noopener noreferrer" title="Abrir áudio" aria-label="Abrir áudio">
+            <svg class="icon icon-small"><use href="#i-link"/></svg>
+          </a>
+          <button class="music-btn" id="music-toggle" type="button" title="Reproduzir ou pausar" aria-label="Reproduzir ou pausar">
+            <svg class="icon"><use href="#i-play" id="music-toggle-icon"/></svg>
+          </button>
+          <label class="music-volume" title="Volume local">
+            <svg class="icon icon-small"><use href="#i-volume"/></svg>
+            <input id="music-volume" type="range" min="0" max="100" value="70" aria-label="Volume da música">
+          </label>
+          <button class="music-stop" id="music-stop" type="button" title="Parar música para todos">Parar</button>
+          <audio id="music-audio" preload="auto"></audio>
+        </div>
+
+        <div class="upload-preview" id="upload-preview" hidden>
+          <span class="upload-thumb" id="upload-thumb"></span>
+          <div class="upload-copy">
+            <strong id="upload-name">arquivo</strong>
+            <span id="upload-status">Enviando...</span>
+            <span class="upload-track"><i id="upload-progress"></i></span>
+          </div>
+          <button class="upload-cancel" id="upload-cancel" type="button" aria-label="Cancelar anexo">
+            <svg class="icon icon-small"><use href="#i-close"/></svg>
+          </button>
+        </div>
+
+        <div class="typing-bar" id="typing-bar" aria-live="polite"></div>
+        <form class="composer" id="composer" autocomplete="off">
+          <div class="composer-tools" role="group" aria-label="Anexar mídia">
+            <button class="tool-btn" type="button" data-upload="image" title="Enviar imagem" aria-label="Enviar imagem">
+              <svg class="icon"><use href="#i-image"/></svg>
+            </button>
+            <button class="tool-btn" type="button" data-upload="video" title="Enviar vídeo" aria-label="Enviar vídeo">
+              <svg class="icon"><use href="#i-video"/></svg>
+            </button>
+            <button class="tool-btn" type="button" data-upload="audio" title="Enviar áudio" aria-label="Enviar áudio">
+              <svg class="icon"><use href="#i-audio"/></svg>
+            </button>
+            <button class="tool-btn" id="music-command" type="button" title="Tocar música com /play" aria-label="Tocar música com comando">
+              <svg class="icon"><use href="#i-music"/></svg>
+            </button>
+          </div>
+          <textarea id="message-input" rows="1" maxlength="1000" placeholder="Escreva uma mensagem..." aria-label="Escreva uma mensagem"></textarea>
+          <div class="composer-side">
+            <span class="char-count" id="char-count">0/1000</span>
+            <button class="send-btn" id="send-btn" type="submit" aria-label="Enviar mensagem">
+              <svg class="icon"><use href="#i-send"/></svg>
+            </button>
+          </div>
+        </form>
+        <input type="file" id="file-image" accept="image/png,image/jpeg,image/gif,image/webp,image/avif" hidden>
+        <input type="file" id="file-video" accept="video/mp4,video/webm,video/ogg,video/quicktime" hidden>
+        <input type="file" id="file-audio" accept="audio/mpeg,audio/ogg,audio/wav,audio/webm,audio/mp4,audio/aac,audio/flac" hidden>
+        <p class="composer-hint" id="composer-hint">Enter envia · Shift + Enter quebra linha · <code>/play &lt;link&gt;</code> toca música · <button class="link-btn" id="admin-hint-open" type="button">atalhos de admin</button></p>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal" id="rename-modal" hidden>
+    <div class="modal-backdrop" data-close-modal="rename"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rename-title">
+      <header class="modal-head">
+        <div>
+          <p class="eyebrow">Sua identidade</p>
+          <h2 id="rename-title">Seu perfil</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close-modal="rename" aria-label="Fechar">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </header>
+      <p class="modal-copy">Seu apelido e sua foto aparecem para todos na sala.</p>
+      <div class="profile-editor">
+        <span class="avatar avatar-lg avatar-0" id="profile-avatar-preview">?</span>
+        <div class="profile-editor-copy">
+          <strong>Foto de perfil</strong>
+          <span id="avatar-status">PNG, JPG, GIF, WebP ou AVIF · recorte e otimização automáticos</span>
+        </div>
+        <button class="btn btn-soft" id="avatar-pick" type="button">Trocar foto</button>
+        <input type="file" id="avatar-file" accept="image/png,image/jpeg,image/gif,image/webp,image/avif" hidden>
+      </div>
+      <p class="form-error" id="avatar-error" hidden></p>
+      <form id="rename-form">
+        <label class="field">
+          <span>Apelido</span>
+          <input id="rename-input" name="name" maxlength="20" required autocomplete="nickname">
+        </label>
+        <p class="form-error" id="rename-error" hidden></p>
+        <div class="modal-actions">
+          <button class="btn btn-soft" type="button" data-close-modal="rename">Cancelar</button>
+          <button class="btn btn-primary" type="submit">Salvar apelido</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+  <aside class="drawer" id="admin-drawer" role="dialog" aria-modal="true" aria-labelledby="admin-title" hidden>
+    <header class="drawer-head">
+      <div>
+        <p class="eyebrow">Moderação</p>
+        <h2 id="admin-title">Área administrativa</h2>
+      </div>
+      <button class="icon-btn" id="admin-close" type="button" aria-label="Fechar painel">
+        <svg class="icon"><use href="#i-close"/></svg>
+      </button>
+    </header>
+
+    <div class="admin-login" id="admin-login">
+      <p class="modal-copy">Informe a senha de administrador para banir, mutar e expulsar usuários.</p>
+      <form id="admin-login-form">
+        <label class="field">
+          <span>Senha administrativa</span>
+          <input id="admin-password" type="password" autocomplete="current-password" required>
+        </label>
+        <p class="form-error" id="admin-login-error" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit">
+          <svg class="icon"><use href="#i-shield"/></svg>
+          Entrar no painel
+        </button>
+      </form>
+      <p class="hint" id="admin-password-hint" hidden></p>
+    </div>
+
+    <div class="admin-panel" id="admin-panel" hidden>
+      <div class="admin-tabs" role="tablist">
+        <button class="admin-tab is-active" data-tab="actions" type="button">Ações</button>
+        <button class="admin-tab" data-tab="sanctions" type="button">Sanções</button>
+        <button class="admin-tab" data-tab="console" type="button">Console</button>
+        <button class="admin-tab" data-tab="audit" type="button">Auditoria</button>
+      </div>
+
+      <section class="admin-section" data-panel="actions">
+        <form class="admin-form" id="action-form">
+          <label class="field">
+            <span>Alvo</span>
+            <input id="target-input" list="target-names" placeholder="Nome ou ID do usuário" autocomplete="off">
+            <datalist id="target-names"></datalist>
+          </label>
+          <div class="field-row">
+            <label class="field">
+              <span>Duração</span>
+              <select id="duration-select">
+                <option value="5">5 minutos</option>
+                <option value="10" selected>10 minutos</option>
+                <option value="60">1 hora</option>
+                <option value="1440">1 dia</option>
+                <option value="0">Permanente</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Motivo</span>
+              <input id="reason-input" maxlength="180" placeholder="Opcional">
+            </label>
+          </div>
+          <div class="action-grid">
+            <button class="btn btn-danger" type="button" data-action="ban">
+              <svg class="icon"><use href="#i-ban"/></svg> Banir
+            </button>
+            <button class="btn btn-warn" type="button" data-action="mute">
+              <svg class="icon"><use href="#i-mute"/></svg> Mutar
+            </button>
+            <button class="btn btn-neutral" type="button" data-action="kick">
+              <svg class="icon"><use href="#i-kick"/></svg> Expulsar
+            </button>
+          </div>
+        </form>
+
+        <hr class="divider">
+
+        <form class="admin-form" id="announce-form">
+          <label class="field">
+            <span>Aviso global</span>
+            <input id="announce-input" maxlength="500" placeholder="Mensagem para todos os usuários">
+          </label>
+          <button class="btn btn-primary" type="submit">Enviar aviso</button>
+        </form>
+
+        <hr class="divider">
+
+        <div class="admin-form">
+          <div class="field-row">
+            <label class="field">
+              <span>Sala</span>
+              <select id="room-manage-select"></select>
+            </label>
+            <label class="field">
+              <span>Slowmode (s)</span>
+              <input id="slowmode-input" type="number" min="0" max="300" step="1" value="0">
+            </label>
+          </div>
+          <div class="action-grid">
+            <button class="btn btn-neutral" type="button" id="apply-slowmode">Aplicar slowmode</button>
+            <button class="btn btn-danger" type="button" id="clear-room">Limpar sala</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-section" data-panel="sanctions" hidden>
+        <div class="section-head">
+          <h3><svg class="icon"><use href="#i-ban"/></svg> Banidos</h3>
+          <span class="count-pill" id="ban-count">0</span>
+        </div>
+        <ul class="sanction-list" id="bans-list"></ul>
+        <div class="section-head">
+          <h3><svg class="icon"><use href="#i-mute"/></svg> Silenciados</h3>
+          <span class="count-pill" id="mute-count">0</span>
+        </div>
+        <ul class="sanction-list" id="mutes-list"></ul>
+      </section>
+
+      <section class="admin-section" data-panel="console" hidden>
+        <div class="console-log" id="console-log">
+          <p class="console-line console-muted">Digite <code>/help</code> para ver os comandos disponíveis.</p>
+        </div>
+        <form class="console-form" id="console-form">
+          <span class="console-prompt">/</span>
+          <input id="console-input" placeholder="ban Visitante-A1B2 10m spam" autocomplete="off">
+          <button class="btn btn-primary" type="submit">Executar</button>
+        </form>
+      </section>
+
+      <section class="admin-section" data-panel="audit" hidden>
+        <ul class="audit-list" id="audit-list"></ul>
+      </section>
+
+      <footer class="admin-footer">
+        <div class="admin-stats" id="admin-stats"></div>
+        <button class="btn btn-soft" id="admin-logout" type="button">Sair do modo admin</button>
+      </footer>
+    </div>
+  </aside>
+
+  <div class="blocked-screen" id="blocked-screen" hidden>
+    <div class="blocked-card">
+      <span class="blocked-mark" id="blocked-mark"><svg class="icon"><use href="#i-ban"/></svg></span>
+      <h2 id="blocked-title">Acesso bloqueado</h2>
+      <p id="blocked-message">Você não pode participar deste chat agora.</p>
+      <p class="blocked-detail" id="blocked-detail"></p>
+      <div class="modal-actions">
+        <a class="btn btn-soft" href="/download">Baixar o projeto</a>
+        <button class="btn btn-primary" id="blocked-retry" type="button">Tentar novamente</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
